@@ -1,0 +1,5 @@
+https://www.mathworks.com/matlabcentral/fileexchange/32849-htk-mfcc-matlab
+
+https://www.mathworks.com/matlabcentral/fileexchange/32301-framing-routines/content/framing/vec2frames.m
+
+https://www.mathworks.com/matlabcentral/fileexchange/31755-triangular-filterbank

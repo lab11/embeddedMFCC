@@ -10,7 +10,6 @@ BUILDDIR ?= $(abspath build/$(TOCK_ARCH))
 C_SRCS := $(wildcard *.c)
 OBJS += $(patsubst %.c,$(BUILDDIR)/%.o,$(C_SRCS))
 
-CFLAGS += -D__CORTEX_M=0x04 
 CPPFLAGS += -DSTACK_SIZE=2048
 
 # include userland master makefile. Contains rules and flags for actually

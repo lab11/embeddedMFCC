@@ -14,17 +14,17 @@
 char hello[] = "Hello World!\r\n";
 char bye[] = "Farewell world! I have computed a FFT!!\r\n";
 
-
 void nop() {}
 
 int main() {
-  putnstr_async(hello, sizeof(hello), nop, NULL);
 
+  putnstr(hello, sizeof(hello));
   // test out the FFT
   unsigned bits = 256;
   
-  int numel = 1000;
-  fft_complex_t data[1000];
+  int numel = 214;
+
+  fft_complex_t data[numel];
   // fill the array with data
   for (int i = 0; i < numel; i++){
     int32_t real = i;
@@ -33,8 +33,9 @@ int main() {
     data[i].i = imag;
  }
   
-  fft_forward(data, bits);
+  fft_forward(data, bits); 
 
-  putnstr_async(bye, sizeof(bye), nop, NULL);
+    
+  putnstr(bye, sizeof(bye));
   return 0;
 }

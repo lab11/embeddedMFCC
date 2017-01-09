@@ -11,7 +11,7 @@
 // add mfcc libraries
 #include "libmfcc.h"
 
-#define numel 256
+#define numel 128
 
 void nop() {}
 
@@ -45,8 +45,9 @@ int main() {
   printf("after making spectrum real\n");
 
   // compute the first 13 coefficients
-  for (int coeff = 0; coeff < 13; coeff++) {
-    double mfcc_result = GetCoefficient(spectrum, 44100, 20, numel, coeff);
+  int numbins = 10;
+  for (int coeff = 0; coeff < numbins; coeff++) {
+    double mfcc_result = GetCoefficient(spectrum, 22050, numbins, numel, coeff);
     printf("%i %i\n", coeff, (int)(1000 * mfcc_result));
   }
   printf("after mfcc\n");

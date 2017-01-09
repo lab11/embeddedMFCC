@@ -11,12 +11,12 @@
 // add mfcc libraries
 #include "libmfcc.h"
 
-#define numel 128
+#define numel 256
 
 void nop() {}
 
 fft_complex_t data[numel];
-double spectrum[numel];
+float spectrum[numel];
 
 int main() {
 
@@ -47,7 +47,7 @@ int main() {
   // compute the first 13 coefficients
   int numbins = 10;
   for (int coeff = 0; coeff < numbins; coeff++) {
-    double mfcc_result = GetCoefficient(spectrum, 22050, numbins, numel, coeff);
+    double mfcc_result = GetCoefficient(spectrum, 44100, numbins, numel, coeff);
     printf("%i %i\n", coeff, (int)(1000 * mfcc_result));
   }
   printf("after mfcc\n");

@@ -21,3 +21,7 @@ system, the hail board.
 - **N=256, Fs=22050 Hz, 10 coefficients**: for 0.010 second sample takes ~3 seconds.
 - **N=128, Fs=44100 Hz, 10 coefficients**: for 0.0025 second sample takes ~1.8 seconds.
 - **N=128, Fs=22050 Hz, 10 coefficients**: for 0.005 second sample takes ~1.8 seconds.
+
+### After switching `double` to `float`
+- **N=256, Fs=44100 Hz, 10 coefficients**: for 0.005 second sample takes ~2.5 seconds.
+- **N=256, Fs=22050 Hz, 10 coefficients**: for 0.010 second sample takes ~2.5 seconds.

@@ -12,18 +12,18 @@
 /* 
  * Computes the specified (mth) MFCC
  *
- * spectralData - array of doubles containing the results of FFT computation. This data is already assumed to be purely real
+ * spectralData - array of floats containing the results of FFT computation. This data is already assumed to be purely real
  * samplingRate - the rate that the original time-series data was sampled at (i.e 44100)
  * NumFilters - the number of filters to use in the computation. Recommended value = 48
  * binSize - the size of the spectralData array, usually a power of 2
  * m - The mth MFCC coefficient to compute
  *
  */
-double GetCoefficient(double* spectralData, unsigned int samplingRate, unsigned int NumFilters, unsigned int binSize, unsigned int m)
+float GetCoefficient(float* spectralData, unsigned int samplingRate, unsigned int NumFilters, unsigned int binSize, unsigned int m)
 {
-	double result = 0.0f;
-	double outerSum = 0.0f;
-	double innerSum = 0.0f;
+	float result = 0.0f;
+	float outerSum = 0.0f;
+	float innerSum = 0.0f;
 	unsigned int k, l;
 
 	// 0 <= m < L
@@ -64,9 +64,9 @@ double GetCoefficient(double* spectralData, unsigned int samplingRate, unsigned 
  * Computes the Normalization Factor (Equation 6)
  * Used for internal computation only - not to be called directly
  */
-double NormalizationFactor(int NumFilters, int m)
+float NormalizationFactor(int NumFilters, int m)
 {
-	double normalizationFactor = 0.0f;
+	float normalizationFactor = 0.0f;
 
 	if(m == 0)
 	{
@@ -84,14 +84,14 @@ double NormalizationFactor(int NumFilters, int m)
  * Compute the filter parameter for the specified frequency and filter bands (Eq. 2)
  * Used for internal computation only - not the be called directly
  */
-double GetFilterParameter(unsigned int samplingRate, unsigned int binSize, unsigned int frequencyBand, unsigned int filterBand)
+float GetFilterParameter(unsigned int samplingRate, unsigned int binSize, unsigned int frequencyBand, unsigned int filterBand)
 {
-	double filterParameter = 0.0f;
+	float filterParameter = 0.0f;
 
-	double boundary = (frequencyBand * samplingRate) / binSize;		// k * Fs / N
-	double prevCenterFrequency = GetCenterFrequency(filterBand - 1);		// fc(l - 1) etc.
-	double thisCenterFrequency = GetCenterFrequency(filterBand);
-	double nextCenterFrequency = GetCenterFrequency(filterBand + 1);
+	float boundary = (frequencyBand * samplingRate) / binSize;		// k * Fs / N
+	float prevCenterFrequency = GetCenterFrequency(filterBand - 1);		// fc(l - 1) etc.
+	float thisCenterFrequency = GetCenterFrequency(filterBand);
+	float nextCenterFrequency = GetCenterFrequency(filterBand + 1);
 
 	if(boundary >= 0 && boundary < prevCenterFrequency)
 	{
@@ -119,9 +119,9 @@ double GetFilterParameter(unsigned int samplingRate, unsigned int binSize, unsig
  * Compute the band-dependent magnitude factor for the given filter band (Eq. 3)
  * Used for internal computation only - not the be called directly
  */
-double GetMagnitudeFactor(unsigned int filterBand)
+float GetMagnitudeFactor(unsigned int filterBand)
 {
-	double magnitudeFactor = 0.0f;
+	float magnitudeFactor = 0.0f;
 	
 	if(filterBand >= 1 && filterBand <= 14)
 	{
@@ -141,10 +141,10 @@ double GetMagnitudeFactor(unsigned int filterBand)
  * center frequencies are equally spaced on the mel scale
  * Used for internal computation only - not the be called directly
  */
-double GetCenterFrequency(unsigned int filterBand)
+float GetCenterFrequency(unsigned int filterBand)
 {
-	double centerFrequency = 0.0f;
-	double exponent;
+	float centerFrequency = 0.0f;
+	float exponent;
 
 	if(filterBand == 0)
 	{

@@ -20,6 +20,10 @@ float spectrum[numel];
 
 int main() {
 
+  // for timing
+  timer_oneshot(10000);
+  unsigned int start = timer_read();
+
   // test out the FFT
   int bits = log2(numel);
 
@@ -33,24 +37,25 @@ int main() {
     }
   }
 
-  printf("data created\n");
+  // printf("data created\n");
   fft_permutate(data, bits);
   fft_forward(data, bits);
 
-  printf("after FFT\n");
   // make FFT results purely real
   for (int i = 0; i < numel; i++) {
     spectrum[i] = data[i].r;
   }
-  printf("after making spectrum real\n");
 
   // compute the first 13 coefficients
   int numbins = 10;
   for (int coeff = 0; coeff < numbins; coeff++) {
-    double mfcc_result = GetCoefficient(spectrum, 44100, numbins, numel, coeff);
-    printf("%i %i\n", coeff, (int)(1000 * mfcc_result));
+    float mfcc_result = GetCoefficient(spectrum, 44100, numbins, numel, coeff);
   }
-  printf("after mfcc\n");
+  // print time
+  unsigned int end = timer_read();
+  unsigned int freq = 16000;
+  printf("end: %i, start: %i, time elapsed is (divide by 16 kHz for seconds): "
+         "%i \n", end, start, (end - start));
 
   return 0;
 }
